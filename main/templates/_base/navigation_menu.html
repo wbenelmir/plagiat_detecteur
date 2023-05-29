@@ -1,0 +1,56 @@
+{% load static %}
+<nav class="pcoded-navbar">
+    <div class="nav-list">
+        <div class="pcoded-inner-navbar main-menu" data-intro="The primary navigation menu provides convenient links to task-specific pages for adding or viewing information" data-step="1">
+            <ul class="mt-3 pcoded-item pcoded-left-item">
+                <li class="{% if request.path == '/' %} active {% endif %}">
+                    <a href="{% url 'home' %}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-home"></i>
+                        </span>
+                        <span class="pcoded-mtext">Accueil</span>
+                    </a>
+                </li>
+          
+                <li class="pcoded-hasmenu {% if '/std/basicInfo' in request.path or '/std/contactInfo' in request.path %} active pcoded-trigger {% endif %}">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="fa fa-user"></i></span>
+                        <span class="pcoded-mtext">Infos générales</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li class="{% if request.path == '/std/basicInfo' %} active pcoded-trigger {% endif %}">
+                            <a href="{% url 'basicInfo' %}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Basique info</span>
+                            </a>
+                        </li>
+                        <li class="{% if request.path == '/std/contactInfo' %} active pcoded-trigger {% endif %}">
+                            <a href="{% url 'contactInfo' %}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Contacte info</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="pcoded-hasmenu {% if '/datasource/show' in request.path or '/datasource/add' in request.path %} active pcoded-trigger {% endif %}">
+                    <a href="javascript:void(0)" class="waves-effect waves-dark">
+                        <span class="pcoded-micon"><i class="fa fa-database"></i></span>
+                        <span class="pcoded-mtext">Data Source</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li class="{% if request.path == '/datasource/show' %} active pcoded-trigger {% endif %}">
+                            <a href="{% url 'datasources' %}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Affichier</span>
+                            </a>
+                        </li>
+                        <li class="{% if request.path == '/datasource/add' %} active pcoded-trigger {% endif %}">
+                            <a href="{% url 'add_datasource' %}" class="waves-effect waves-dark">
+                                <span class="pcoded-mtext">Ajouter</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

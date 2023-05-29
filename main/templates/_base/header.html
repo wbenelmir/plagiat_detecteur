@@ -1,0 +1,101 @@
+{% load static %}
+<!-- [ Header ] start -->
+<nav class="navbar header-navbar pcoded-header">
+    <div class="navbar-wrapper">
+        <div class="navbar-logo">
+            <a target="_blank" href="{% url 'home' %}">
+                <img class="img-fluid" src="{% static 'template/files/assets/images/logo.png' %}" alt="Theme-Logo" />
+            </a>
+            <a  target="_blank"  class="mobile-menu" id="mobile-collapse" href="{% url 'home' %}">
+                <i class="feather icon-menu icon-toggle-right"></i>
+            </a>
+            <a class="mobile-options waves-effect waves-light">
+                <i class="feather icon-more-horizontal"></i>
+            </a>
+        </div>
+        <div class="navbar-container container-fluid">
+            <div>
+                <ul class="nav-left" data-intro="By utilizing the top menu, you have the option to propose an initiative, information about streamlining repatriation processes, explore government assistance, and more." data-step="4">
+                    <li hidden class="header-search">
+                        <div class="main-search morphsearch-search">
+                            <div class="input-group">
+                                <span class="input-group-text search-close">
+                                    <i class="feather icon-x input-group-text"></i>
+                                </span>
+                                <input onchange="research()" type="text" class="form-control" name="researchInput"
+                                    id="researchInput" placeholder="Rechercher">
+                                <span class="input-group-text search-btn">
+                                    <i class="feather icon-search input-group-text"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <script>
+                        var input = document.getElementById("researchInput");
+                        function research() {
+                            window.location.replace("../../../research?input=" + input.value);
+                        }
+                    </script>
+                    <li style="margin-top: 8px;">
+                        <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                            <i class="full-screen feather icon-maximize"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav-right" data-intro="The user panel provides access to settings where you can make edits and modifications, as well as a logout option to exit the platform." data-step="5">
+                    <li class="user-profile header-notification">
+        
+                        <div class="dropdown-primary dropdown">
+                            <div class="dropdown-toggle" data-bs-toggle="dropdown">
+                                <img src="{% static 'template/files/assets/images/avatar-4.jpg' %}" class="img-radius"
+                                    alt="User-Profile-Image">
+                                <span>
+                                    {% if request.user %}
+                                    {% if request.user.is_authenticated %}    
+                                    {% if request.user.is_superuser %}
+                                    Admin   
+                                    {% else %}                      
+                                    {{request.user}}
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endif %}
+                                </span>
+                                <i class="feather icon-chevron-down"></i>
+                            </div>
+                            <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn"
+                                data-dropdown-out="fadeOut">
+                                <!-- <li>
+                                        <a href="#!">
+                                            <i class="feather icon-settings"></i> Paramètre
+        
+                                        </a>
+                                    </li> -->
+                                <li hidden>
+                                    <a href="">
+                                        <i class="feather icon-user"></i> Paramètres
+                                    </a>
+                                </li>
+                                <li hidden onclick="startTour();">
+                                    <a href="#!">
+                                        <i class="fa fa-flag-o"></i> Start a Tour
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'user_contact' %}">
+                                        <i class="fa fa-commenting-o"></i> Contactez-nous
+                                    </a>
+                                </li> 
+                                <li>
+                                    <a href="{% url 'logout' %}">
+                                        <i class="feather icon-log-out"></i> Se déconnecter
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- [ Header ] end -->

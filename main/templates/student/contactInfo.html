@@ -1,0 +1,205 @@
+{% extends "_base/base_site.html" %}
+{% load static %}
+
+{% block title %} | Contact Info. {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Select 2 css -->
+<link rel="stylesheet" href="{% static 'template/files/bower_components/select2/css/select2.min.css' %}" />
+<!-- Multi Select css -->
+<link rel="stylesheet" type="text/css"
+    href="{% static 'template/files/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css' %}" />
+<link rel="stylesheet" type="text/css"
+    href="{% static 'template/files/bower_components/multiselect/css/multi-select.css' %}" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="pcoded-content" data-intro="The main page" data-step="6">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="fa fa-info bg-c-blue"></i>
+                    <div class="d-inline">
+                        <h5>Utilisateur</h5>
+                        <span>Contact Info.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
+                        <li class="breadcrumb-item">
+                            <a href=""><i class="fa fa-info"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#!">Contact Info</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <!-- [ page content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Contact Info.</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li class="first-opt"><i
+                                                    class="feather icon-chevron-left open-card-option"></i></li>
+                                            <li><i class="feather icon-maximize full-card"></i></li>
+                                            <li><i class="feather icon-minus minimize-card"></i></li>
+                                            <li><i class="feather icon-refresh-cw reload-card"></i></li>
+                                            <li><i class="feather icon-trash close-card"></i></li>
+                                            <li><i class="feather icon-chevron-left open-card-option"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <p hidden>Please fill in all the required fields<code>(*)</code></a></p>
+                                    <br />
+                                    <form action="" method="post" class="" style="color: #2A3F54;"
+                                        enctype="multipart/form-data">
+                                        {% csrf_token %}
+
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Numéro de téléphone
+                                                :</label>
+                                            <div class="col-sm-9">
+                                                {{ contactInfo.phone }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">E-mail
+                                                :</label>
+                                            <div class="col-sm-9">
+                                                {{ contactInfo.email }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">LinkedIn
+                                                :</label>
+                                            <div class="col-sm-9">
+                                                {{ contactInfo.linkedin }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                        </div>
+
+                                        {% if messages %}
+                                        <br>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label"></label>
+                                            <div class="col-sm-9">
+                                                {% for message in messages %}
+                                                {% if message.tags == "success" %}
+                                                <span style="margin-left: 10px; color: darkgreen; "><i
+                                                        style="margin-right: 10px;" class="fa fa-check-circle-o"></i>
+                                                    {{message}}</span>
+
+                                                {% elif message.tags == "warning" %}
+                                                <span style="margin-left: 10px; color:orange; "><i
+                                                        style="margin-right: 10px;"
+                                                        class="fa fa-question-circle"></i>{{message}}</span>
+                                                {% elif message.tags == "info" %}
+                                                <span
+                                                    style="margin-left: 10px; font-weight: bold; color:darkslategrey; "><i
+                                                        style="margin-right: 10px;"
+                                                        class="fa fa-exclamation"></i>{{message}}</span>
+                                                {% else %}
+                                                <span style="margin-left: 10px;color:rgb(206, 67, 33); "><i
+                                                        style="margin-right: 10px;"
+                                                        class="fa fa-exclamation-triangle"></i>{{message}}</span>
+                                                {% endif %}
+                                                {% endfor %}
+                                                <br>
+                                            </div>
+
+                                        </div>
+                                        {% endif %}
+
+                                        <div class="form-group mt-5">
+                                            <div class="col-md-3 col-md-offset-3" style="float: right;">
+                                                <div class="col-md-9 col-md-offset-3 text-right">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Envoyer <i style="margin-left: 10px;"
+                                                            class="ti-angle-double-right"></i> </button>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ page content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+<script src="{% static 'template/files/assets/pages/wysiwyg-editor/js/tinymce.min.js' %}"></script>
+<!-- Custom js -->
+<script src="{% static 'template/files/assets/pages/wysiwyg-editor/wysiwyg-editor.js' %}"></script>
+
+<!-- modernizr js -->
+<script type="text/javascript" src="{% static 'template/files/bower_components/modernizr/js/modernizr.js' %}"></script>
+<script type="text/javascript"
+    src="{% static 'template/files/bower_components/modernizr/js/css-scrollbars.js' %}"></script>
+<!-- Select 2 js -->
+<script type="text/javascript"
+    src="{% static 'template/files/bower_components/select2/js/select2.full.min.js' %}"></script>
+<!-- Multiselect js -->
+<script type="text/javascript"
+    src="{% static 'template/files/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js' %}">
+    </script>
+<!-- Custom js -->
+<script src="{% static 'template/files/assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+
+<script>
+
+
+    function makeid(length) {
+        let result = '';
+        const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+        }
+        return result;
+    }
+
+    var ref = new Date();
+    var x = ("0" + (ref.getMonth() + 1)).slice(-2) + ("0" + (ref.getDate() + 2)).slice(-2) + ("0" + (ref.getHours() + 2)).slice(-2) + ("0" + (ref.getMinutes() + 2)).slice(-2) + ("0" + (ref.getSeconds() + 2)).slice(-2);
+
+
+
+</script>
+
+{% endblock javascripts %}

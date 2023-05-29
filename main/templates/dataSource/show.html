@@ -1,0 +1,188 @@
+{% extends "_base/base_site.html" %}
+{% load static %}
+
+{% block title %} | DataS ource {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Data Table Css -->
+<link rel="stylesheet" type="text/css"
+    href="{% static 'template/files/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" type="text/css"
+    href="{% static 'template/files/assets/pages/data-table/css/buttons.dataTables.min.css' %}">
+<link rel="stylesheet" type="text/css"
+    href="{% static 'template/files/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="pcoded-content" data-intro="The main page" data-step="6">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="fa fa-database bg-c-blue"></i>
+                    <div class="d-inline">
+                        <h5>Data source</h5>
+                        <span>Liste des documents</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
+                        <li class="breadcrumb-item">
+                            <a href=""><i class="fa fa-database"></i></a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#!">Data source</a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="#!">Afficher</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <div class="pcoded-inner-content">
+        <!-- Main-body start -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- Page-body start -->
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- HTML (DOM) Sourced Data table start -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Liste des documents</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="dom-table" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <th width="60%">Titre</th>
+                                                    <th>Document</th>
+                                                    <th>Date</th>
+                                                    <th width="5%">Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% if datasources %}
+                                                {% for datasource in datasources %}
+                                                <tr>
+                                                    <td>
+                                                        {% if datasource.code_data %}
+                                                        <label style="font-weight: bold;"
+                                                            class="form-label label label-primary">
+                                                            {{datasource.code_data}}
+                                                        </label>
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if datasource.title %}
+                                                        {{datasource.title | truncatechars:120}}
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if datasource.doc %}
+                                     
+                                                        <span style="margin-top:15px;" >
+                                                            <a target="_blank" style="color: crimson; margin-left: 5px; margin-right: 5px;" 
+                                                            href="../../../media/{{ datasource.doc.name  }}" >
+                                                                <i class="fa fa-file-pdf-o"></i>
+                                                            </a>                            
+                                                        </span>
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if datasource.insert_in %}
+                                                        {{datasource.insert_in |date:"d/m/Y"}}
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'edit_datasource' datasource.code_data %}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </td>
+                                                    
+                                                </tr>
+                                                {% endfor %}
+                                                {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- HTML (DOM) Sourced Data table end -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Page-body end -->
+            </div>
+        </div>
+        <!-- Main-body start -->
+        <div id="styleSelector">
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+<!-- data-table js -->
+<script src="{% static 'template/files/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script
+    src="{% static 'template/files/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'template/files/assets/pages/data-table/js/jszip.min.js' %}"></script>
+<script src="{% static 'template/files/assets/pages/data-table/js/pdfmake.min.js' %}"></script>
+<script src="{% static 'template/files/assets/pages/data-table/js/vfs_fonts.js' %}"></script>
+<script src="{% static 'template/files/bower_components/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'template/files/bower_components/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+<script
+    src="{% static 'template/files/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script
+    src="{% static 'template/files/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script
+    src="{% static 'template/files/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
+
+<script src="{% static 'template/files/assets/pages/data-table/js/data-table-custom.js' %}"></script>
+<script src="{% static 'template/files/assets/js/pcoded.min.js' %}"></script>
+<script src="{% static 'template/files/assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+<script>
+    // $(document).ready(function () {
+    //     $('#dom-table').DataTable({
+    //         "language": {
+    //             "url": "//cdn.datatables.net/plug-ins/1.12.0/i18n/fr-FR.json"
+    //         }
+    //     });
+    // });
+    function cp(id) {
+    // Get the text field
+    var copyText = document.getElementById(id);
+
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+
+    // Alert the copied text
+    
+    //alert("Copied the text: " + copyText.value);
+    }
+</script>
+{% endblock javascripts %}

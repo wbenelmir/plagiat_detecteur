@@ -1,0 +1,100 @@
+{% extends "_base/base_site.html" %}
+{% load static %}
+
+{% block title %} - Simple Page {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="feather icon-home bg-c-blue"></i>
+                    <div class="d-inline">
+                        <h5>Accueil</h5>
+                        <span>Page d'Accueil</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
+                        <li class="breadcrumb-item">
+                            <a href="index.html"><i class="feather icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#!">Page d'Accueil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <!-- [ page content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Page d'Accueil</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li class="first-opt"><i
+                                                    class="feather icon-chevron-left open-card-option"></i></li>
+                                            <li><i class="feather icon-maximize full-card"></i></li>
+                                            <li><i class="feather icon-minus minimize-card"></i></li>
+                                            <li><i class="feather icon-refresh-cw reload-card"></i></li>
+                                            <li><i class="feather icon-trash close-card"></i></li>
+                                            <li><i class="feather icon-chevron-left open-card-option"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <p>
+                                        Un détecteur de plagiat est un outil précieux pour les éducateurs, les étudiants et les chercheurs afin de garantir 
+                                        l'intégrité académique. Ce logiciel spécialisé analyse le texte soumis et le compare à une vaste base de données 
+                                        comprenant des documents académiques, des articles de recherche et d'autres sources en ligne. 
+                                        <br><br>
+                                        Il identifie les similitudes entre le texte soumis et le contenu existant, signalant ainsi toute forme de plagiat potentiel. 
+                                        Cela permet aux utilisateurs de vérifier l'originalité de leur travail et de s'assurer qu'ils respectent les normes éthiques de 
+                                        la recherche et de l'écriture académique.
+
+                                        <br><br>
+                                        L'utilisation d'un détecteur de plagiat offre de nombreux avantages. Tout d'abord, il permet de prévenir et de décourager le plagiat. 
+                                        Les étudiants sont moins susceptibles de copier du contenu lorsqu'ils savent qu'ils seront confrontés à un détecteur de plagiat rigoureux.
+                                         De plus, les éducateurs peuvent utiliser cet outil pour évaluer la qualité des travaux soumis et détecter les éventuelles fraudes. 
+                                         Enfin, les chercheurs peuvent également bénéficier de cet outil en veillant à ce que leur propre travail soit original et en évitant 
+                                         toute accusation de plagiat qui pourrait nuire à leur réputation et à leurs futurs travaux.
+                                        <br><br>
+                                        En résumé, un détecteur de plagiat est un outil essentiel pour promouvoir l'intégrité académique. 
+                                        Il permet de prévenir le plagiat, d'encourager l'originalité et de garantir le respect des normes 
+                                        éthiques de la recherche et de l'écriture. Que ce soit pour les étudiants, les éducateurs ou les 
+                                        chercheurs, l'utilisation d'un détecteur de plagiat contribue à maintenir des pratiques de travail 
+                                        honnêtes et à assurer la crédibilité et la qualité des travaux académiques.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ page content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+<!-- <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script> -->
+{% endblock javascripts %}

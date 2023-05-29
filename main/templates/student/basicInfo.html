@@ -1,0 +1,415 @@
+{% extends "_base/base_site.html" %}
+{% load static %}
+
+{% block title %} | Basique Info. {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Select 2 css -->
+<link rel="stylesheet" href="{% static 'template/files/bower_components/select2/css/select2.min.css' %}" />
+<!-- Multi Select css -->
+<link rel="stylesheet" type="text/css"
+    href="{% static 'template/files/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css' %}" />
+<link rel="stylesheet" type="text/css"
+    href="{% static 'template/files/bower_components/multiselect/css/multi-select.css' %}" />
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="pcoded-content" data-intro="The main page" data-step="6">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="fa fa-info bg-c-blue"></i>
+                    <div class="d-inline">
+                        <h5>Utilisateur</h5>
+                        <span>Basique Info.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
+                        <li class="breadcrumb-item">
+                            <a href=""><i class="fa fa-info"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#!">Basique Info</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <!-- [ page content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Basique Info.</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li class="first-opt"><i
+                                                    class="feather icon-chevron-left open-card-option"></i></li>
+                                            <li><i class="feather icon-maximize full-card"></i></li>
+                                            <li><i class="feather icon-minus minimize-card"></i></li>
+                                            <li><i class="feather icon-refresh-cw reload-card"></i></li>
+                                            <li><i class="feather icon-trash close-card"></i></li>
+                                            <li><i class="feather icon-chevron-left open-card-option"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <p>Veuillez remplir tous les champs obligatoires<code>(*)</code></a></p>
+                                    <br />
+                                    <form action="{% url 'basicInfo' %}" method="post" class="" style="color: #2A3F54;">
+                                        {% csrf_token %}
+                                        <div hidden class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label">CODE
+                                                :</label>
+                                            <div class="col-sm-10">
+                                                {{ basicInfoForm.code_student }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <code>(*)</code>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label">Prénom
+                                                :</label>
+                                            <div class="col-sm-10">
+                                                {{ basicInfoForm.first_name }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <code>(*)</code>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label">Nom
+                                                :</label>
+                                            <div class="col-sm-10">
+                                                {{ basicInfoForm.last_name }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <code>(*)</code>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label">E-mail
+                                                :</label>
+                                            <div class="col-sm-10">
+                                                {{ basicInfoForm.email }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <code>(*)</code>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label">Domain
+                                                :</label>
+                                            <div class="col-sm-10">
+                                                {{ basicInfoForm.domain }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <code>(*)</code>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label">Location
+                                                :</label>
+                                            <div class="col-sm-10">
+                                                {{ basicInfoForm.country }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                               
+                                            </div>
+                                        </div>
+
+                                        <div hidden class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label">Region
+                                                :</label>
+                                            <div class="col-sm-10">
+                                                <select id="region" class='form-control' ><option value="">-- region --</option></select>
+                                            </div>
+                                            <div class="col-sm-1">
+                                              
+                                            </div>
+                                        </div>
+                                        <div hidden class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label">City
+                                                :</label>
+                                            <div class="col-sm-10">
+                                                <select id="city" class='form-control' ><option value="">-- City --</option></select>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <code>(*)</code>
+                                            </div>
+                                        </div>
+                                        
+
+                                        <div id='location'></div>
+
+                                        {% if messages %}
+                                        <br>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-1 col-form-label"></label>
+                                            <div class="col-sm-10">
+                                        {% for message in messages %}
+                                        
+
+                                                
+                                                
+                                                {% if message.tags == "success" %}
+                                                <span style="margin-left: 10px; color: darkgreen; "><i style="margin-right: 10px;" class="fa fa-check-circle-o"></i> {{message}}</span>
+                                                
+                                                {% elif message.tags == "warning" %} 
+                                                <span style="margin-left: 10px; color:orange; "><i style="margin-right: 10px;" class="fa fa-question-circle"></i>{{message}}</span>
+                                                {% elif message.tags == "info" %}
+                                                <span style="margin-left: 10px; font-weight: bold; color:darkslategrey; "><i style="margin-right: 10px;" class="fa fa-exclamation"></i>{{message}}</span>
+                                                {% else %}
+                                                <span style="margin-left: 10px;color:rgb(206, 67, 33); "><i style="margin-right: 10px;" class="fa fa-exclamation-triangle"></i>{{message}}</span>
+                                                {% endif %}
+                
+                                                
+
+                                        
+                                        {% endfor %}
+                                        <br>
+                                    </div>
+
+                                </div>
+                                        {% endif %}
+
+                                        <div class="form-group mt-5">
+                                            <div class="col-md-3 col-md-offset-3" style="float: right;">
+                                                <div class="col-md-9 col-md-offset-3 text-right">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Envoyer <i style="margin-left: 10px;" class="ti-angle-double-right"></i> </button>
+                                                </div>
+                                            </div>
+                                            <br><br>
+
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ page content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+<!-- modernizr js -->
+<script type="text/javascript" src="{% static 'template/files/bower_components/modernizr/js/modernizr.js' %}"></script>
+<script type="text/javascript"
+    src="{% static 'template/files/bower_components/modernizr/js/css-scrollbars.js' %}"></script>
+<!-- Select 2 js -->
+<script type="text/javascript"
+    src="{% static 'template/files/bower_components/select2/js/select2.full.min.js' %}"></script>
+<!-- Multiselect js -->
+<script type="text/javascript"
+    src="{% static 'template/files/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js' %}">
+    </script>
+<!-- Custom js -->
+<script src="{% static 'template/files/assets/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+
+
+<script>
+
+
+    function makeid(length) 
+    {
+        let result = '';
+        const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        counter += 1;
+        }
+        return result;
+    }
+
+    var ref = new Date();
+    var x = ("0" + (ref.getMonth() + 1)).slice(-2) + ("0" + (ref.getDate() + 2)).slice(-2) + ("0" + (ref.getHours() + 2)).slice(-2) + ("0" + (ref.getMinutes() + 2)).slice(-2) + ("0" + (ref.getSeconds() + 2)).slice(-2);
+
+
+    //console.log(makeid(8));
+
+    $(document).ready(function() {
+  //-------------------------------SELECT CASCADING-------------------------//
+  var selectedCountry = (selectedRegion = selectedCity = countryCode = "");
+
+  // This is a demo API key for testing purposes. You should rather request your API key (free) from http://battuta.medunes.net/
+  var BATTUTA_KEY = "00000000000000000000000000000000";
+  // Populate country select box from battuta API
+  url =
+    "https://battuta.medunes.net/api/country/all/?key=" +
+    BATTUTA_KEY +
+    "&callback=?";
+
+  // EXTRACT JSON DATA.
+  $.getJSON(url, function(data) {
+    console.log(data);
+    $.each(data, function(index, value) {
+      // APPEND OR INSERT DATA TO SELECT ELEMENT. Set the country code in the id section rather than in the value.
+      if(value.name != 'Israel')
+      {
+        if(value.name == 'Palestinian Territory') value.name = 'Palestine';
+            $("#country").append(
+            '<option id="' +
+            value.code +
+            '" value="' +
+            value.name +
+            '">' +
+            value.name +
+            "</option>"
+        );
+      }
+      else
+      {
+        value.name = 'Sahara occidental';
+        value.code = 'SOO';
+
+        $("#country").append(
+            '<option id="' +
+            value.code +
+            '" value="' +
+            value.name +
+            '">' +
+            value.name +
+            "</option>"
+            );
+
+      }
+
+      
+        
+    });
+  });
+  // Country selected --> update region list .
+  $("#country").change(function() {
+    selectedCountry = this.options[this.selectedIndex].text;
+// get the id of the option which has the country code.
+    countryCode = $(this)
+      .children(":selected")
+      .attr("id");
+    // Populate country select box from battuta API
+    url =
+      "https://battuta.medunes.net/api/region/" +
+      countryCode +
+      "/all/?key=" +
+      BATTUTA_KEY +
+      "&callback=?";
+    $.getJSON(url, function(data) {
+      $("#region option").remove();
+      $('#region').append('<option value="">Please select your region</option>');
+      $.each(data, function(index, value) {
+        // APPEND OR INSERT DATA TO SELECT ELEMENT.
+        $("#region").append(
+          '<option value="' + value.region + '">' + value.region + "</option>"
+        );
+      });
+    });
+  });
+  // Region selected --> updated city list
+  $("#region").on("change", function() {
+    selectedRegion = this.options[this.selectedIndex].text;
+    // Populate country select box from battuta API
+    // countryCode = $("#country").val();
+    region = $("#region").val();
+    url =
+      "https://battuta.medunes.net/api/city/" +
+      countryCode +
+      "/search/?region=" +
+      region +
+      "&key=" +
+      BATTUTA_KEY +
+      "&callback=?";
+    $.getJSON(url, function(data) {
+      console.log(data);
+      $("#city option").remove();
+      $('#city').append('<option value="">Please select your city</option>');
+      $.each(data, function(index, value) {
+        // APPEND OR INSERT DATA TO SELECT ELEMENT.
+        $("#city").append(
+                '<option value="' + value.city + '">' + value.city + "</option>"
+            );
+      });
+    });
+  });
+  // city selected --> update location string
+  $("#city").on("change", function() {
+    selectedCity = this.options[this.selectedIndex].text;
+    $("#location").html(
+      "Locatation: Country: " +
+        selectedCountry +
+        ", Region: " +
+        selectedRegion +
+        ", City: " +
+        selectedCity
+    );
+  });
+});
+
+// very simple process form function to collect input values.
+function processForm() {
+  var username = (password = country = region = city = "");
+  username = $("#username").val();
+  password = $("#password").val();
+  country = $("#country").val();
+  region = $("#region").val();
+  city = $("#city").val();
+  if (
+    // username != "" &&
+    // password != "" &&
+    country != "" &&
+    region != "" &&
+    city != ""
+  ) {
+    $("#location").html(
+      // "Username: " +
+      //   username +
+      //   " /Password: " +
+      //   password +
+        "Locatation: Country: " +
+        country +
+        ", Region: " +
+        region +
+        ", City: " +
+        city
+    );
+  } else {
+    $("#location").html("Fill Country, Region and City to view the location");
+    return false;
+  }
+
+}
+
+
+$("#country").append('<option value="{{country}}">{{country}}</option>');
+$("#region").append('<option value="{{region}}">{{region}}</option>');
+
+
+</script>
+
+{% endblock javascripts %}
