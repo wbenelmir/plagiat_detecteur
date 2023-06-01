@@ -10,12 +10,21 @@ class DatasourceForm(forms.ModelForm):
             'code_data',
             'title',
             'doc',
+            
             'codes_pages_de_garde',
             'titres_pages_de_garde',
-            'liens_descripteurs_locaux_type',
-            'nombre_paragraphe',
-            'nombre_phrase',
-            'nombre_mot',
+
+            'pg_titre_nombre_paragraphe',
+            'pg_titre_nombre_phrase',
+            'pg_titre_nombre_mot',
+
+            'conclusion_nombre_paragraphe',
+            'conclusion_nombre_phrase', 
+            'conclusion_nombre_mot',
+
+            'introduction_nombre_paragraphe',
+            'introduction_nombre_phrase',
+            'introduction_nombre_mot',
         )
 
         widgets = {
@@ -68,51 +77,91 @@ class DatasourceForm(forms.ModelForm):
                     'id': 'titres_pages_de_garde',
                 }
             ),
-            'liens_descripteurs_locaux_type': forms.TextInput
+            'pg_titre_nombre_paragraphe': forms.TextInput
             (
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'liens_descripteurs_locaux_type',
-                    'name': 'liens_descripteurs_locaux_type',
-                    'id': 'liens_descripteurs_locaux_type',
+                    'placeholder': 'pg_titre_nombre_paragraphe',
+                    'name': 'pg_titre_nombre_paragraphe',
+                    'id': 'pg_titre_nombre_paragraphe',
                 }
             ),
-            'liens_descripteurs_locaux_type': forms.TextInput
+            'pg_titre_nombre_phrase': forms.TextInput
             (
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'liens_descripteurs_locaux_type',
-                    'name': 'liens_descripteurs_locaux_type',
-                    'id': 'liens_descripteurs_locaux_type',
+                    'placeholder': 'pg_titre_nombre_phrase',
+                    'name': 'pg_titre_nombre_phrase',
+                    'id': 'pg_titre_nombre_phrase',
                 }
             ),
-            'nombre_paragraphe': forms.TextInput
+            'pg_titre_nombre_mot': forms.TextInput
             (
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'nombre_paragraphe',
-                    'name': 'nombre_paragraphe',
-                    'id': 'nombre_paragraphe',
+                    'placeholder': 'pg_titre_nombre_mot',
+                    'name': 'pg_titre_nombre_mot',
+                    'id': 'pg_titre_nombre_mot',
                      'type' : 'number'
                 }
             ),
-            'nombre_phrase': forms.TextInput
+            'conclusion_nombre_paragraphe': forms.TextInput
             (
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'nombre_phrase',
-                    'name': 'nombre_phrase',
-                    'id': 'nombre_phrase',
+                    'placeholder': 'conclusion_nombre_paragraphe',
+                    'name': 'conclusion_nombre_paragraphe',
+                    'id': 'conclusion_nombre_paragraphe',
                      'type' : 'number'
                 }
             ),
-            'nombre_mot': forms.TextInput
+            'conclusion_nombre_phrase': forms.TextInput
             (
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'nombre_mot',
-                    'name': 'nombre_mot',
-                    'id': 'nombre_mot',
+                    'placeholder': 'conclusion_nombre_phrase',
+                    'name': 'conclusion_nombre_phrase',
+                    'id': 'conclusion_nombre_phrase',
+                     'type' : 'number'
+                }
+            ),
+            'conclusion_nombre_mot': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'conclusion_nombre_mot',
+                    'name': 'conclusion_nombre_mot',
+                    'id': 'conclusion_nombre_mot',
+                     'type' : 'number'
+                }
+            ),
+            'introduction_nombre_paragraphe': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'introduction_nombre_paragraphe',
+                    'name': 'introduction_nombre_paragraphe',
+                    'id': 'introduction_nombre_paragraphe',
+                     'type' : 'number'
+                }
+            ),
+            'introduction_nombre_phrase': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'introduction_nombre_phrase',
+                    'name': 'introduction_nombre_phrase',
+                    'id': 'introduction_nombre_phrase',
+                     'type' : 'number'
+                }
+            ),
+            'introduction_nombre_mot': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'introduction_nombre_mot',
+                    'name': 'introduction_nombre_mot',
+                    'id': 'introduction_nombre_mot',
                      'type' : 'number'
                 }
             ),

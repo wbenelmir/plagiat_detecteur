@@ -53,7 +53,7 @@
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Data Source</h5>
+                                    <h5>Document</h5>
                                     <div class="card-header-right">
                                         <ul class="list-unstyled card-option">
                                             <li class="first-opt"><i
@@ -72,9 +72,9 @@
                                     <form action="" method="post" class="" style="color: #2A3F54;" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div  class="row mb-3">
-                                            <label class="form-label col-sm-1 col-form-label">CODE
+                                            <label class="form-label col-sm-2 col-form-label">CODE
                                                 :</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-9">
                                                 {{ datasourceForm.code_data }}
                                             </div>
                                             <div class="col-sm-1">
@@ -83,9 +83,9 @@
                                         </div>
 
                                         <div class="row mb-4">
-                                            <label class="form-label col-sm-1 col-form-label">Titre
+                                            <label class="form-label col-sm-2 col-form-label">Titre
                                                 :</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-9">
                                                 {{ datasourceForm.title }}
                                             </div>
                                             <div class="col-sm-1">
@@ -94,9 +94,9 @@
                                         </div>
 
                                         <div class="row mb-3">
-                                            <label class="form-label col-sm-1 col-form-label">Doc
+                                            <label class="form-label col-sm-2 col-form-label">Doc
                                                 :</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-9">
                                                 {{ datasourceForm.doc }}
                                             </div>
                                             <div class="col-sm-1">
@@ -114,75 +114,149 @@
                                         </div>
                                        
                                         <div class="row mt-4">
-                                            <div class="col-sm-1"></div>
-                                            <div class="col-sm-10" style="font-weight: bold;">
+                                            <div class="col-sm-11" style="font-weight: bold;">
                                                <hr>
                                             </div>
                                             <div class="col-sm-1"></div>
                                         </div>
 
                                         <div class="row mb-4 mt-2">
-                                            <div class="col-sm-1"></div>
-                                            <div class="col-sm-11" style="font-weight: bold;">
-                                                Discripteur & Liens Descripteurs Locaux
+                                            <div class="col-sm-12" style="font-weight: bold;">
+                                                Page de Garde
                                             </div>
                                         </div>
                                         <div class="row mb-3 mt-4">
-                                            <label class="form-label col-sm-1 col-form-label">Titre extrait
+                                            <label class="form-label col-sm-2 col-form-label">Titre extrait
                                                 :</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-9">
                                                 {{ datasourceForm.titres_pages_de_garde }}
                                             </div>
                                             <div class="col-sm-1">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="form-label col-sm-1 col-form-label">Code PG
+                                            <label class="form-label col-sm-2 col-form-label">Code Page de Garde
                                                 :</label>
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-9">
                                                 {{ datasourceForm.codes_pages_de_garde }}
                                             </div>
                                             <div class="col-sm-1">
                                             </div>
                                         </div>
-
+                                        <div class="row mt-4">
+                                            <div class="col-sm-11" style="font-weight: bold;">
+                                               <hr>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+                                        <div class="row mb-4 mt-2">
+                                            <div class="col-sm-12" style="font-weight: bold;">
+                                                Titre
+                                            </div>
+                                        </div>
                                         <div class="row mb-3">
-                                            <label class="form-label col-sm-1 col-form-label">Type
+                                            <label class="form-label col-sm-2 col-form-label">Nombre paragraphes
                                                 :</label>
-                                            <div class="col-sm-10">
-                                                {{ datasourceForm.liens_descripteurs_locaux_type }}
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.pg_titre_nombre_paragraphe }}
                                             </div>
                                             <div class="col-sm-1">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="form-label col-sm-1 col-form-label">Nombre paragraphes
+                                            <label class="form-label col-sm-2 col-form-label">Nombre phrases
                                                 :</label>
-                                            <div class="col-sm-10">
-                                                {{ datasourceForm.nombre_paragraphe }}
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.pg_titre_nombre_phrase }}
                                             </div>
                                             <div class="col-sm-1">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="form-label col-sm-1 col-form-label">Nombre phrases
+                                            <label class="form-label col-sm-2 col-form-label">Nombre mots
                                                 :</label>
-                                            <div class="col-sm-10">
-                                                {{ datasourceForm.nombre_phrase }}
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.pg_titre_nombre_mot }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-sm-11" style="font-weight: bold;">
+                                               <hr>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+                                        <div class="row mb-4 mt-2">
+                                            <div class="col-sm-12" style="font-weight: bold;">
+                                                Introduction
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Nombre paragraphes
+                                                :</label>
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.conclusion_nombre_paragraphe }}
                                             </div>
                                             <div class="col-sm-1">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label class="form-label col-sm-1 col-form-label">Nombre mots
+                                            <label class="form-label col-sm-2 col-form-label">Nombre phrases
                                                 :</label>
-                                            <div class="col-sm-10">
-                                                {{ datasourceForm.nombre_mot }}
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.conclusion_nombre_phrase }}
                                             </div>
                                             <div class="col-sm-1">
                                             </div>
                                         </div>
-
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Nombre mots
+                                                :</label>
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.conclusion_nombre_mot }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-sm-11" style="font-weight: bold;">
+                                               <hr>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+                                        <div class="row mb-4 mt-2">
+                                            <div class="col-sm-12" style="font-weight: bold;">
+                                                Conclusion
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Nombre paragraphes
+                                                :</label>
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.introduction_nombre_paragraphe }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Nombre phrases
+                                                :</label>
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.introduction_nombre_phrase }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="form-label col-sm-2 col-form-label">Nombre mots
+                                                :</label>
+                                            <div class="col-sm-9">
+                                                {{ datasourceForm.introduction_nombre_mot }}
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                        </div>
 
 
 

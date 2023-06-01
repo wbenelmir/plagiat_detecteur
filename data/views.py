@@ -55,29 +55,49 @@ def add_datasource(request):
                 file_name = str(datasource.doc.name)
                 list = file_name.split('.')
                 file_name = list[0]
-                discriptor = Segmentation(src, file_name)
-                
-                if datasource and discriptor:
-                    datasource.codes_pages_de_garde = discriptor[0]['codes_pages_de_garde'][0]#.replace('  ','')
-                    datasource.titres_pages_de_garde = discriptor[0]['titres_pages_de_garde'][0]#.replace(': SIOD ', '')
-                    datasource.liens_descripteurs_locaux_type = discriptor[0]['liens_descripteurs_locaux'][0]['type']
-                    datasource.nombre_paragraphe = discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_paragraphe']
-                    datasource.nombre_phrase = discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_phrase']
-                    datasource.nombre_mot = discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_mot']
+
+                ### Segmentation ############################################################################################
+                # discriptor = Segmentation(src, file_name)
+                convertir_en_texte(src, file_name)
+                dictionnaire_nettoye = lire_fichiers_texte(src, file_name)
+
+                global_discriptor = []
+
+                descripteur_global = extraire_pages_de_garde(dictionnaire_nettoye)
+                descripteur_local_intro = extraire_conclusion(dictionnaire_nettoye, descripteur_global)
+                descripteur_local_conclu = extraire_introduction(dictionnaire_nettoye, descripteur_global)
+                global_discriptor.append(descripteur_global)
+
+                if datasource and global_discriptor:
+                    datasource.codes_pages_de_garde = global_discriptor[0]['codes_pages_de_garde'][0]#.replace('  ','')
+                    datasource.titres_pages_de_garde = global_discriptor[0]['titres_pages_de_garde'][0]#.replace(': SIOD ', '')
+                    datasource.pg_titre_nombre_paragraphe = global_discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_paragraphe']
+                    datasource.pg_titre_nombre_phrase = global_discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_phrase']
+                    datasource.pg_titre_nombre_mot = global_discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_mot']
                     if request.user.is_superuser:
                         datasource.is_archive = True
                     else:
                         datasource.is_archive = False
-                        
+                    
+                    datasource.descripteur_global = global_discriptor
                     datasource.save()
 
-                    # print(discriptor[0]['codes_pages_de_garde'][0])
-                    # print(discriptor[0]['titres_pages_de_garde'][0])
-                    # print(discriptor[0]['liens_descripteurs_locaux'][0]['type'])
-                    # print(discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_paragraphe'])
-                    # print(discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_phrase'])
-                    # print(discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_mot'])
+                if datasource and descripteur_local_intro:
+                    datasource.conclusion_nombre_paragraphe = descripteur_local_intro['nombre_paragraphe']
+                    datasource.conclusion_nombre_phrase = descripteur_local_intro['nombre_phrase']
+                    datasource.conclusion_nombre_mot = descripteur_local_intro['nombre_mot']
+                    
+                    datasource.descripteur_conclusion = descripteur_local_intro
+                    datasource.save()
 
+                if datasource and descripteur_local_conclu:
+                    datasource.introduction_nombre_paragraphe = descripteur_local_conclu['nombre_paragraphe']
+                    datasource.introduction_nombre_phrase = descripteur_local_conclu['nombre_phrase']
+                    datasource.introduction_nombre_mot = descripteur_local_conclu['nombre_mot']
+                    
+                    datasource.descripteur_introduction = descripteur_local_conclu
+                    datasource.save()
+                    
             except BaseException as e:
                 print(str(e))
             messages.success(request, 'Les données ont été insérées avec succès.')

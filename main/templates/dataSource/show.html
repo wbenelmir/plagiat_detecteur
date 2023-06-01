@@ -63,12 +63,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>Code</th>
-                                                    <th width="60%">Titre</th>
-                                                    <th>Code</th>
-                                                    <th>Type</th>
-                                                    <th>Paragraphes</th>
-                                                    <th>Phrases</th>
-                                                    <th>Mots</th>
+                                                    <th width="30%">Page de Garde</th>
+                                                    <th width="30%">Introduction</th>
+                                                    <th width="30%">Conclusion</th>
                                                     <th>Date</th>
                                                     <th width="5%">Edit</th>
                                                 </tr>
@@ -87,48 +84,67 @@
                                                         -
                                                         {% endif %}
                                                     </td>
-                                                    <td>
-                                                        {% if datasource.title %}
-                                                        {{datasource.title | truncatechars:80}}
-                                                        {% else %}
-                                                        -
-                                                        {% endif %}
-                                                    </td>
+
                                                     <td>
                                                         {% if datasource.codes_pages_de_garde %}
-                                                        {{datasource.codes_pages_de_garde | truncatechars:50}}
-                                                        {% else %}
-                                                        -
+                                                        Code : {{datasource.codes_pages_de_garde | truncatechars:50}}<br>
                                                         {% endif %}
+
+                                                        {% if datasource.titres_pages_de_garde %}
+                                                        Titre : {{datasource.titres_pages_de_garde | truncatechars:50}}<br>
+                                                        {% endif %}
+
+                                                        
+                                                        {% if datasource.pg_titre_nombre_paragraphe %}
+                                                        Nombre Paragraphes : {{datasource.pg_titre_nombre_paragraphe}}<br>
+                                                        {% endif %}
+
+                                                        {% if datasource.conclusion_nombre_phrase %}
+                                                        Nombre Phrases : {{datasource.conclusion_nombre_phrase}}<br>
+                                                        {% endif %}
+
+                                                        {% if datasource.conclusion_nombre_mot %}
+                                                        Nombre Mots : {{datasource.conclusion_nombre_mot}}<br>
+                                                        {% endif %}
+
                                                     </td>
+
                                                     <td>
-                                                        {% if datasource.liens_descripteurs_locaux_type %}
-                                                        {{datasource.liens_descripteurs_locaux_type | truncatechars:20}}
-                                                        {% else %}
-                                                        -
+                                                        
+                                                        {% if datasource.introduction_nombre_paragraphe %}
+                                                        Nombre Paragraphes : {{datasource.introduction_nombre_paragraphe}}<br>
                                                         {% endif %}
+
+                                                        {% if datasource.introduction_nombre_phrase %}
+                                                        Nombre Phrases : {{datasource.introduction_nombre_phrase}}<br>
+                                                        {% endif %}
+
+                                                        {% if datasource.introduction_nombre_mot %}
+                                                        Nombre Mots : {{datasource.introduction_nombre_mot}}<br>
+                                                        {% endif %}
+
                                                     </td>
+
                                                     <td>
-                                                        {% if datasource.nombre_paragraphe %}
-                                                        {{datasource.nombre_paragraphe}}
-                                                        {% else %}
-                                                        -
+                                                        
+                                                        {% if datasource.conclusion_nombre_paragraphe %}
+                                                        Nombre Paragraphes : {{datasource.conclusion_nombre_paragraphe}}<br>
                                                         {% endif %}
-                                                    </td>
-                                                    <td>
-                                                        {% if datasource.nombre_phrase %}
-                                                        {{datasource.nombre_phrase}}
-                                                        {% else %}
-                                                        -
+
+                                                        {% if datasource.conclusion_nombre_phrase %}
+                                                        Nombre Phrases : {{datasource.conclusion_nombre_phrase}}<br>
                                                         {% endif %}
-                                                    </td>
-                                                    <td>
-                                                        {% if datasource.nombre_mot %}
-                                                        {{datasource.nombre_mot}}
-                                                        {% else %}
-                                                        -
+
+                                                        {% if datasource.conclusion_nombre_mot %}
+                                                        Nombre Mots : {{datasource.conclusion_nombre_mot}}<br>
                                                         {% endif %}
+
                                                     </td>
+                                                   
+
+
+
+
                                                     <td>
                                                         {% if datasource.insert_in %}
                                                         {{datasource.insert_in |date:"d/m/Y"}}

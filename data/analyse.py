@@ -8,7 +8,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 nltk.download('stopwords')
+nltk.download('omw-1.4')
 stop_words = set(stopwords.words('french'))
+nltk.download('wordnet')
 
 def convertir_en_texte(repertoire, nom_fichier=None):
     extensions = ('.docx',)
@@ -196,13 +198,134 @@ def extraire_pages_de_garde(dictionnaire_nettoye):
         })
 
     return descripteur_global
-    
+
+def extraire_introduction(dictionnaire_nettoye, descripteur_global):
+    # MOTIF DE RECHERCHE
+    intro_expression = r'Introduction générale [\s\n]+(.*?)Chapitre'
+
+    # LISTE POUR STOCKER LES INFORMATIONS DE L'INTRODUCTION
+    introduction = []
+    descripteur_code = {}
+    for nom_fichier, contenu in dictionnaire_nettoye.items():
+        file_list = [nom_fichier]
+        intro_list = []
+        if re.search(intro_expression, contenu):
+            intro = re.search(intro_expression, contenu)
+            intro_text = intro.group(1).strip()
+
+            # SEGMENTATION DE L'INTRODUCTION
+            intro_segmentee = {}
+            intro_segmentee["paragraphes"] = intro_text.split("\n")
+            nombre_paragraphes = len(intro_segmentee["paragraphes"])
+            phrases = []
+            for paragraphe in intro_segmentee["paragraphes"]:
+                phrases.extend(nltk.sent_tokenize(paragraphe))
+            intro_segmentee["phrases"] = phrases
+            nombre_phrases = len(phrases)
+            mots = []
+            for phrase in phrases:
+                for word in nltk.word_tokenize(phrase):
+                    synonyms = []
+                    for syn in wn.synsets(word, lang='fra'):
+                        for lemma in syn.lemmas(lang='fra'):
+                            if lemma.name() != word:
+                                synonyms.append(lemma.name())
+                    mots.append({
+                        "texte": word,
+                        "synonymes": synonyms,
+                        "prefixes": [word[:i] for i in range(3, min(len(word), 3) + 1)],
+                        "suffixes": [word[-i:] for i in range(3, min(len(word), 3) + 1)],
+                    })
+
+                intro_segmentee["mots"] = mots
+                nombre_mots = len(mots)
+            intro_segmentee["nombre_paragraphes"] = nombre_paragraphes
+            intro_segmentee["nombre_phrases"] = nombre_phrases
+            intro_segmentee["nombre_mots"] = nombre_mots
+            intro_list.append(intro_segmentee)
+
+            # Création du descripteur local
+            descripteur_local_intro = {
+                "nombre_paragraphe": nombre_paragraphes,
+                "nombre_phrase": nombre_phrases,
+                "nombre_mot": nombre_mots,
+            }
+            intro_segmentee["descripteur_local"] = descripteur_local_intro
+            descripteur_global["liens_descripteurs_locaux"].append({
+                "type": "introductuion",
+                "lien": intro_segmentee["descripteur_local"]
+            
+            })
+        introduction.append(intro_list)
+    return descripteur_local_intro
+
+def extraire_conclusion(dictionnaire_nettoye, descripteur_global):
+    # MOTIF DE RECHERCHE
+    conclu_expression = r'Conclusion générale [\s\n]+(.*?)Bibliographie'
+
+    # LISTE POUR STOCKER LES INFORMATIONS DE LA CONCLUSION
+    conclusion = []
+    for nom_fichier, contenu in dictionnaire_nettoye.items():
+        file_list = [nom_fichier]
+        conclu_list = []
+        if re.search(conclu_expression, contenu):
+            conclu = re.search(conclu_expression, contenu)
+            conclu_text = conclu.group(1).strip()
+
+            # SEGMENTATION DE LA CONCLUSION
+            conclu_segmentee = {}
+            conclu_segmentee["paragraphes"] = conclu_text.split("\n")
+            nombre_paragraphes = len(conclu_segmentee["paragraphes"])
+            phrases = []
+            for paragraphe in conclu_segmentee["paragraphes"]:
+                phrases.extend(nltk.sent_tokenize(paragraphe))
+            conclu_segmentee["phrases"] = phrases
+            nombre_phrases = len(phrases)
+            mots = []
+            for phrase in phrases:
+                for word in nltk.word_tokenize(phrase):
+                    synonyms = []
+                    for syn in wn.synsets(word, lang='fra'):
+                        for lemma in syn.lemmas(lang='fra'):
+                            if lemma.name() != word:
+                                synonyms.append(lemma.name())
+                    mots.append({
+                        "texte": word,
+                        "synonymes": synonyms,
+                        "prefixes": [word[:i] for i in range(3, min(len(word), 3) + 1)],
+                        "suffixes": [word[-i:] for i in range(3, min(len(word), 3) + 1)],
+                    })
+
+                conclu_segmentee["mots"] = mots
+                nombre_mots = len(mots)
+            conclu_segmentee["nombre_paragraphes"] = nombre_paragraphes
+            conclu_segmentee["nombre_phrases"] = nombre_phrases
+            conclu_segmentee["nombre_mots"] = nombre_mots
+            conclu_list.append(conclu_segmentee)
+
+            # Création du descripteur local
+            descripteur_local_conclu = {
+                "nombre_paragraphe": nombre_paragraphes,
+                "nombre_phrase": nombre_phrases,
+                "nombre_mot": nombre_mots,
+            }
+            conclu_segmentee["descripteur_local"] = descripteur_local_conclu
+            descripteur_global["liens_descripteurs_locaux"].append({
+                "type": "conclusion",
+                "lien": conclu_segmentee["descripteur_local"]
+            })
+
+        conclusion.append(conclu_list)
+    return descripteur_local_conclu    
+
 def Segmentation(repertoire, nom_fichier=None):
     convertir_en_texte(repertoire, nom_fichier)
     dictionnaire_nettoye = lire_fichiers_texte(repertoire, nom_fichier)
     descripteurs_globaux = []
-
+    
     descripteur_global = extraire_pages_de_garde(dictionnaire_nettoye)
+    descripteur_local_intro = extraire_conclusion(dictionnaire_nettoye, descripteur_global)
+    descripteur_local_conclu = extraire_introduction(dictionnaire_nettoye, descripteur_global)
     descripteurs_globaux.append(descripteur_global)
 
     return descripteurs_globaux
@@ -257,7 +380,6 @@ def recuperer_descripteur(titres_pertinents, liste_descripteurs):
             break
     return descripteur_pertinent
     
-
 def calculer_similarite_cosinus(descripteur_cible, descripteurs_pertinents):
     # Extraire les titres des descripteurs cible et pertinents
     titre_cible = descripteur_cible.get("titres_pages_de_garde", [""])[0]
