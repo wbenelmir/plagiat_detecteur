@@ -64,7 +64,11 @@
                                                 <tr>
                                                     <th>Code</th>
                                                     <th width="60%">Titre</th>
-                                                    <th>Document</th>
+                                                    <th>Code</th>
+                                                    <th>Type</th>
+                                                    <th>Paragraphes</th>
+                                                    <th>Phrases</th>
+                                                    <th>Mots</th>
                                                     <th>Date</th>
                                                     <th width="5%">Edit</th>
                                                 </tr>
@@ -85,20 +89,42 @@
                                                     </td>
                                                     <td>
                                                         {% if datasource.title %}
-                                                        {{datasource.title | truncatechars:120}}
+                                                        {{datasource.title | truncatechars:80}}
                                                         {% else %}
                                                         -
                                                         {% endif %}
                                                     </td>
                                                     <td>
-                                                        {% if datasource.doc %}
-                                     
-                                                        <span style="margin-top:15px;" >
-                                                            <a target="_blank" style="color: crimson; margin-left: 5px; margin-right: 5px;" 
-                                                            href="../../../media/{{ datasource.doc.name  }}" >
-                                                                <i class="fa fa-file-pdf-o"></i>
-                                                            </a>                            
-                                                        </span>
+                                                        {% if datasource.codes_pages_de_garde %}
+                                                        {{datasource.codes_pages_de_garde | truncatechars:50}}
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if datasource.liens_descripteurs_locaux_type %}
+                                                        {{datasource.liens_descripteurs_locaux_type | truncatechars:20}}
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if datasource.nombre_paragraphe %}
+                                                        {{datasource.nombre_paragraphe}}
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if datasource.nombre_phrase %}
+                                                        {{datasource.nombre_phrase}}
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if datasource.nombre_mot %}
+                                                        {{datasource.nombre_mot}}
                                                         {% else %}
                                                         -
                                                         {% endif %}
@@ -111,6 +137,17 @@
                                                         {% endif %}
                                                     </td>
                                                     <td>
+                                                        {% if datasource.doc %}
+                                     
+                                                        <span style="margin-top:15px;" >
+                                                            <a target="_blank" style="color: #103F91; margin-left: 5px; margin-right: 5px;" 
+                                                            href="../../../media/{{ datasource.doc.name  }}" >
+                                                                <i class="fa fa-file-word-o"></i>
+                                                            </a>                            
+                                                        </span>
+                                                        {% else %}
+                                                        -
+                                                        {% endif %}
                                                         <a href="{% url 'edit_datasource' datasource.code_data %}">
                                                             <i class="fa fa-edit"></i>
                                                         </a>

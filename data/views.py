@@ -12,6 +12,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from authentification.decorators import *
 
+from .analyse import *
+from django.conf import settings
+
+# if settings.DEBUG:
+#     print(str(settings.MEDIA_URL)+ '/'+datasource.doc.name)
+# else:
+#     print(str(settings.MEDIA_ROOT)+ '/'+datasource.doc.name)
+src = str(settings.MEDIA_URL) 
+src =  'media'
+
 @login_required(login_url='login')
 def datasources(request):
 
@@ -41,6 +51,33 @@ def add_datasource(request):
                 if user:
                     datasource.user = user
                     datasource.save()
+                
+                file_name = str(datasource.doc.name)
+                list = file_name.split('.')
+                file_name = list[0]
+                discriptor = Segmentation(src, file_name)
+                
+                if datasource and discriptor:
+                    datasource.codes_pages_de_garde = discriptor[0]['codes_pages_de_garde'][0]#.replace('  ','')
+                    datasource.titres_pages_de_garde = discriptor[0]['titres_pages_de_garde'][0]#.replace(': SIOD ', '')
+                    datasource.liens_descripteurs_locaux_type = discriptor[0]['liens_descripteurs_locaux'][0]['type']
+                    datasource.nombre_paragraphe = discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_paragraphe']
+                    datasource.nombre_phrase = discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_phrase']
+                    datasource.nombre_mot = discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_mot']
+                    if request.user.is_superuser:
+                        datasource.is_archive = True
+                    else:
+                        datasource.is_archive = False
+                        
+                    datasource.save()
+
+                    # print(discriptor[0]['codes_pages_de_garde'][0])
+                    # print(discriptor[0]['titres_pages_de_garde'][0])
+                    # print(discriptor[0]['liens_descripteurs_locaux'][0]['type'])
+                    # print(discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_paragraphe'])
+                    # print(discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_phrase'])
+                    # print(discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_mot'])
+
             except BaseException as e:
                 print(str(e))
             messages.success(request, 'Les données ont été insérées avec succès.')

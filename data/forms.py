@@ -10,6 +10,12 @@ class DatasourceForm(forms.ModelForm):
             'code_data',
             'title',
             'doc',
+            'codes_pages_de_garde',
+            'titres_pages_de_garde',
+            'liens_descripteurs_locaux_type',
+            'nombre_paragraphe',
+            'nombre_phrase',
+            'nombre_mot',
         )
 
         widgets = {
@@ -37,11 +43,77 @@ class DatasourceForm(forms.ModelForm):
             (
                 attrs={
                     'class': 'font-weight-bold custom-file-input',
-                    'accept' : '.pdf',
+                    'accept' : '.docx',
                     'name': 'doc',
                     'id': 'doc',
                     'maxlength' : '1000',
                 },
                 
+            ),
+            'codes_pages_de_garde': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'codes_pages_de_garde',
+                    'name': 'codes_pages_de_garde',
+                    'id': 'codes_pages_de_garde',
+                }
+            ),
+            'titres_pages_de_garde': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'titres_pages_de_garde',
+                    'name': 'titres_pages_de_garde',
+                    'id': 'titres_pages_de_garde',
+                }
+            ),
+            'liens_descripteurs_locaux_type': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'liens_descripteurs_locaux_type',
+                    'name': 'liens_descripteurs_locaux_type',
+                    'id': 'liens_descripteurs_locaux_type',
+                }
+            ),
+            'liens_descripteurs_locaux_type': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'liens_descripteurs_locaux_type',
+                    'name': 'liens_descripteurs_locaux_type',
+                    'id': 'liens_descripteurs_locaux_type',
+                }
+            ),
+            'nombre_paragraphe': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'nombre_paragraphe',
+                    'name': 'nombre_paragraphe',
+                    'id': 'nombre_paragraphe',
+                     'type' : 'number'
+                }
+            ),
+            'nombre_phrase': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'nombre_phrase',
+                    'name': 'nombre_phrase',
+                    'id': 'nombre_phrase',
+                     'type' : 'number'
+                }
+            ),
+            'nombre_mot': forms.TextInput
+            (
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'nombre_mot',
+                    'name': 'nombre_mot',
+                    'id': 'nombre_mot',
+                     'type' : 'number'
+                }
             ),
         }
