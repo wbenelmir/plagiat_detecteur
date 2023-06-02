@@ -37,7 +37,10 @@ def copy_file(source_path, destination_path):
 @login_required(login_url='login')
 def analyse(request, code_data):
 
-    datasource = Datasource.objects.get(code_data=code_data)
+    try:
+        datasource = Datasource.objects.get(code_data=code_data)
+    except:
+        return redirect('datasources')
 
     titres = []
 

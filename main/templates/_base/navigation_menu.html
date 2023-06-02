@@ -12,6 +12,7 @@
                     </a>
                 </li>
                 {%  if request.user.is_superuser %}
+				{% else %}
                 <li class="pcoded-hasmenu {% if '/std/basicInfo' in request.path or '/std/contactInfo' in request.path %} active pcoded-trigger {% endif %}">
                     <a href="javascript:void(0)" class="waves-effect waves-dark">
                         <span class="pcoded-micon"><i class="fa fa-user"></i></span>

@@ -76,14 +76,14 @@
                                                 <tr>
                                                     <td>
                                                         {% if datasource.code_data %}
-                                                        <label hidden style="font-weight: bold;"
+														<label style="font-weight: bold;"
                                                             class="form-label label label-primary">
                                                             {{datasource.code_data}}
                                                         </label>
                                                         {%  if datasource.is_archive %} 
                                                         <span style="color: goldenrod;" ><i class="fa fa-star"></i></span>
                                                         {% else %}
-                                                        <br>
+                                                        <br><br>
                                                         <a href="{% url 'analyse' datasource.code_data  %}" >
                                                             <button class="btn waves-effect waves-light btn-primary"><i class="icofont icofont-check-circled"></i>Analyse</button>
                                                         </a>
