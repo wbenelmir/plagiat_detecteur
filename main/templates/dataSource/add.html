@@ -24,7 +24,7 @@
                 <div class="page-header-title">
                     <i class="fa fa-database bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Data Source</h5>
+                        <h5>{%  if request.user.is_superuser %} Data Source <span style="color: goldenrod;" >(archive) </span>{% else %} Véricateur de Plagiat {% endif %}</h5>
                         <span>Ajouter</span>
                     </div>
                 </div>

@@ -15,6 +15,10 @@ from authentification.decorators import *
 from .analyse import *
 from django.conf import settings
 
+import os
+import shutil
+from django.conf import settings
+
 # if settings.DEBUG:
 #     print(str(settings.MEDIA_URL)+ '/'+datasource.doc.name)
 # else:
@@ -22,10 +26,24 @@ from django.conf import settings
 src = str(settings.MEDIA_URL) 
 src =  'media'
 
+def copy_file(source_path, destination_path):
+    # Get the full paths for the source and destination files
+    source_full_path = os.path.join(settings.MEDIA_ROOT, source_path)
+    destination_full_path = os.path.join(settings.MEDIA_ROOT, destination_path)
+
+    # Create the destination directory if it doesn't exist
+    os.makedirs(os.path.dirname(destination_full_path), exist_ok=True)
+
+    # Copy the file from source to destination
+    shutil.copy2(source_full_path, destination_full_path)
+
 @login_required(login_url='login')
 def datasources(request):
 
-    datasources = Datasource.objects.all().order_by('id')
+    if request.user.is_superuser:
+        datasources = Datasource.objects.filter(is_archive = True)
+    else:
+        datasources = Datasource.objects.filter(is_archive = False)
 
     context = {
         'datasources' : datasources,
@@ -57,11 +75,25 @@ def add_datasource(request):
                 file_name = list[0]
 
                 ### Segmentation ############################################################################################
-                # discriptor = Segmentation(src, file_name)
-                convertir_en_texte(src, file_name)
-                dictionnaire_nettoye = lire_fichiers_texte(src, file_name)
 
                 global_discriptor = []
+
+                if request.user.is_superuser:
+                    copy_file(datasource.doc.name, 'archive/'+datasource.doc.name)
+                    convertir_en_texte('media/archive', file_name)
+                    dictionnaire_nettoye = lire_fichiers_texte('media/archive', file_name)
+                else:
+                    convertir_en_texte('media', file_name)
+                    dictionnaire_nettoye = lire_fichiers_texte('media', file_name)
+
+                descripteur_global = extraire_pages_de_garde(dictionnaire_nettoye)
+                descripteur_local_intro = extraire_conclusion(dictionnaire_nettoye, descripteur_global)
+                descripteur_local_conclu = extraire_introduction(dictionnaire_nettoye, descripteur_global)
+                global_discriptor.append(descripteur_global)
+
+                # dictionnaire_nettoye = lire_fichiers_texte(src, file_name)
+
+                # global_discriptor = []
 
                 descripteur_global = extraire_pages_de_garde(dictionnaire_nettoye)
                 descripteur_local_intro = extraire_conclusion(dictionnaire_nettoye, descripteur_global)
@@ -74,6 +106,7 @@ def add_datasource(request):
                     datasource.pg_titre_nombre_paragraphe = global_discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_paragraphe']
                     datasource.pg_titre_nombre_phrase = global_discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_phrase']
                     datasource.pg_titre_nombre_mot = global_discriptor[0]['liens_descripteurs_locaux'][0]['lien']['nombre_mot']
+
                     if request.user.is_superuser:
                         datasource.is_archive = True
                     else:

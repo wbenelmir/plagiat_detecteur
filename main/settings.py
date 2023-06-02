@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'authentification.apps.AuthentificationConfig',
     'student.apps.StudentConfig',
     'data.apps.DataConfig',
+    'analyse.apps.AnalyseConfig',
 
     'import_export',
 

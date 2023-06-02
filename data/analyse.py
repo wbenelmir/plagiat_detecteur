@@ -14,10 +14,12 @@ nltk.download('wordnet')
 
 def convertir_en_texte(repertoire, nom_fichier=None):
     extensions = ('.docx',)
+
     try:
         if nom_fichier:
             nom_fichier = nom_fichier + '.docx'
             chemin_fichier = os.path.join(repertoire, nom_fichier)
+            
             if os.path.isfile(chemin_fichier) and nom_fichier.endswith(extensions):
                 # Extraire le texte à partir du fichier
                 texte = docx2txt.process(chemin_fichier)
@@ -25,13 +27,14 @@ def convertir_en_texte(repertoire, nom_fichier=None):
                 # Créer un nouveau nom de fichier pour le fichier texte
                 nouveau_nom_fichier = os.path.splitext(nom_fichier)[0] + '.txt'
                 nouveau_chemin_fichier = os.path.join(repertoire, nouveau_nom_fichier)
-                    
+                
                 # Écrire le texte extrait dans un nouveau fichier texte
                 with open(nouveau_chemin_fichier, 'w', encoding='utf-8') as f:
                     f.write(texte)
         else:
             for nom_fichier in os.listdir(repertoire):
                 chemin_fichier = os.path.join(repertoire, nom_fichier)
+               
                 if os.path.isfile(chemin_fichier) and nom_fichier.endswith(extensions):
                     # Extraire le texte à partir du fichier
                     texte = docx2txt.process(chemin_fichier)
@@ -39,10 +42,11 @@ def convertir_en_texte(repertoire, nom_fichier=None):
                     # Créer un nouveau nom de fichier pour le fichier texte
                     nouveau_nom_fichier = os.path.splitext(nom_fichier)[0] + '.txt'
                     nouveau_chemin_fichier = os.path.join(repertoire, nouveau_nom_fichier)
-                    
+
                     # Écrire le texte extrait dans un nouveau fichier texte
                     with open(nouveau_chemin_fichier, 'w', encoding='utf-8') as f:
                         f.write(texte)
+
     except Exception as error:
         print("An exception occurred:", error)
 

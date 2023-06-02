@@ -1,0 +1,324 @@
+{% extends "_base/base_site.html" %}
+{% load static %}
+
+{% block title %} - Simple Page {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="pcoded-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header card">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="feather icon-watch bg-c-blue"></i>
+                    <div class="d-inline">
+                        <h5>Véricateur de Plagiat</h5>
+                        <span>Calculer de similarité</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class=" breadcrumb breadcrumb-title breadcrumb-padding">
+                        <li class="breadcrumb-item">
+                            <a href=""><i class="feather icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#!">Calculer de similarité</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <!-- [ page content ] start -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Document Inséré</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li class="first-opt"><i class="feather icon-chevron-left open-card-option"></i></li>
+                                            <li><i class="feather icon-maximize full-card"></i></li>
+                                            <li><i class="feather icon-minus minimize-card"></i></li>
+                                            <li><i class="feather icon-refresh-cw reload-card"></i></li>
+                                            <li><i class="feather icon-trash close-card"></i></li>
+                                            <li><i class="feather icon-chevron-left open-card-option"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block box-list">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="p-20 z-depth-top-0" data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title=".z-depth-top-0">
+                                                <p style="font-weight: bold; margin-bottom: 20px;" >
+                                                    INFORMATION GÉNÉRALE:
+                                                </p>
+                                                <p style="margin-top: 10px;" >
+                                                    {% if datasource.codes_pages_de_garde %}
+                                                    Code : {{datasource.codes_pages_de_garde | truncatechars:100}}<br>
+                                                    {% endif %}
+                                    
+                                                    {% if datasource.titres_pages_de_garde %}
+                                                    Titre : {{datasource.titres_pages_de_garde | truncatechars:100}}<br>
+                                                    {% endif %}
+                                    
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="p-20 z-depth-top-0" data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title=".z-depth-top-0">
+                                                <p style="font-weight: bold; margin-bottom: 20px;" >
+                                                    PAGE DE GARDE:
+                                                </p>
+                                                <p style="margin-top: 10px;" >
+                                                    {% if datasource.pg_titre_nombre_paragraphe %}
+                                                    Nombre Paragraphes : {{datasource.pg_titre_nombre_paragraphe}}<br>
+                                                    {% endif %}
+                                    
+                                                    {% if datasource.conclusion_nombre_phrase %}
+                                                    Nombre Phrases : {{datasource.conclusion_nombre_phrase}}<br>
+                                                    {% endif %}
+                                    
+                                                    {% if datasource.conclusion_nombre_mot %}
+                                                    Nombre Mots : {{datasource.conclusion_nombre_mot}}<br>
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="p-20 z-depth-top-0" data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title=".z-depth-top-0">
+                                                <p style="font-weight: bold; margin-bottom: 20px;" >
+                                                    INTRODUCTION:
+                                                </p>
+                                                <p style="margin-top: 10px;" >
+                                                    {% if datasource.introduction_nombre_paragraphe %}
+                                                    Nombre Paragraphes : {{datasource.introduction_nombre_paragraphe}}<br>
+                                                    {% endif %}
+
+                                                    {% if datasource.introduction_nombre_phrase %}
+                                                    Nombre Phrases : {{datasource.introduction_nombre_phrase}}<br>
+                                                    {% endif %}
+
+                                                    {% if datasource.introduction_nombre_mot %}
+                                                    Nombre Mots : {{datasource.introduction_nombre_mot}}<br>
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="p-20 z-depth-top-0" data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title=".z-depth-top-0">
+                                                <p style="font-weight: bold; margin-bottom: 20px;" >
+                                                    CONCLUSION:
+                                                </p>
+                                                <p style="margin-top: 10px;" >
+                                                    {% if datasource.conclusion_nombre_paragraphe %}
+                                                    Nombre Paragraphes : {{datasource.conclusion_nombre_paragraphe}}<br>
+                                                    {% endif %}
+
+                                                    {% if datasource.conclusion_nombre_phrase %}
+                                                    Nombre Phrases : {{datasource.conclusion_nombre_phrase}}<br>
+                                                    {% endif %}
+
+                                                    {% if datasource.conclusion_nombre_mot %}
+                                                    Nombre Mots : {{datasource.conclusion_nombre_mot}}<br>
+                                                    {% endif %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+
+                                <div class="card-header">
+                                    <h5>Documents Pertinents</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li class="first-opt"><i class="feather icon-chevron-left open-card-option"></i></li>
+                                            <li><i class="feather icon-maximize full-card"></i></li>
+                                            <li><i class="feather icon-minus minimize-card"></i></li>
+                                            <li><i class="feather icon-refresh-cw reload-card"></i></li>
+                                            <li><i class="feather icon-trash close-card"></i></li>
+                                            <li><i class="feather icon-chevron-left open-card-option"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block box-list">
+                                    <div class="row">
+                                        {% if codes_pg.0 %}
+                                            <div class="col-lg-3">
+                                                <div class="p-20 z-depth-top-0" data-toggle="tooltip" data-placement="top" title=""
+                                                    data-original-title=".z-depth-top-0">
+                                                    <p style="font-weight: bold; margin-bottom: 10px;" >
+                                                        Document N° 01
+                                                    </p>
+                                                    <p style="margin-top: 10px;" >
+                                                        {% if codes_pg.0 %}
+                                                        Code : {{codes_pg.0}}<br>
+                                                        {% endif %}                                   
+                                                        {% if titres_pg.0 %}
+                                                        Titre : {{titres_pg.0}}<br>
+                                                        {% endif %}                                   
+                                                    </p>
+                                                    <p style="margin-top: 10px;" >
+                                                        <span style="font-weight: bold;">PAGE DE GARDE:</span><br>
+                                                        Nombre Paragraphes : {{titre.0.0}}<br>
+                                                        Nombre Phrases : {{titre.1.0}}<br>
+                                                        Nombre Mots : {{titre.2.0}}<br>
+                                                    </p>
+                                                    <p style="margin-top: 3px;" >
+                                                        <span style="font-weight: bold;">INTRODUCTION:</span><br>
+                                                        Nombre Paragraphes : {{introductuion.0.0}}<br>
+                                                        Nombre Phrases : {{introductuion.1.0}}<br>
+                                                        Nombre Mots : {{introductuion.2.0}}<br>
+                                                    </p>
+                                                    <p style="margin-top: 3px;" >
+                                                        <span style="font-weight: bold;">CONCLUSION:&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                                                        Nombre Paragraphes : {{conclusion.0.0}}<br>
+                                                        Nombre Phrases : {{conclusion.1.0}}<br>
+                                                        Nombre Mots : {{conclusion.2.0}}<br>
+                                                    </p>
+                                                </div>
+                                            </div> 
+                                        {% endif %}
+                                        {% if codes_pg.1 %}
+                                            <div class="col-lg-3">
+                                                <div class="p-20 z-depth-top-0" data-toggle="tooltip" data-placement="top" title=""
+                                                    data-original-title=".z-depth-top-0">
+                                                    <p style="font-weight: bold; margin-bottom: 10px;" >
+                                                        Document N° 02
+                                                    </p>
+                                                    <p style="margin-top: 10px;" >
+                                                        {% if codes_pg.1 %}
+                                                        Code : {{codes_pg.1}}<br>
+                                                        {% endif %}                                   
+                                                        {% if titres_pg.1 %}
+                                                        Titre : {{titres_pg.1}}<br>
+                                                        {% endif %}                                   
+                                                    </p>
+                                                    <p style="margin-top: 10px;" >
+                                                        <span style="font-weight: bold;">PAGE DE GARDE:</span><br>
+                                                        Nombre Paragraphes : {{titre.0.1}}<br>
+                                                        Nombre Phrases : {{titre.1.1}}<br>
+                                                        Nombre Mots : {{titre.2.1}}<br>
+                                                    </p>
+                                                    <p style="margin-top: 3px;" >
+                                                        <span style="font-weight: bold;">INTRODUCTION:</span><br>
+                                                        Nombre Paragraphes : {{introductuion.0.1}}<br>
+                                                        Nombre Phrases : {{introductuion.1.1}}<br>
+                                                        Nombre Mots : {{introductuion.2.1}}<br>
+                                                    </p>
+                                                    <p style="margin-top: 3px;" >
+                                                        <span style="font-weight: bold;">CONCLUSION:&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                                                        Nombre Paragraphes : {{conclusion.0.1}}<br>
+                                                        Nombre Phrases : {{conclusion.1.1}}<br>
+                                                        Nombre Mots : {{conclusion.2.1}}<br>
+                                                    </p>
+                                                </div>
+                                            </div> 
+                                        {% endif %}  
+                                        {% if codes_pg.2 %}
+                                            <div class="col-lg-3">
+                                                <div class="p-20 z-depth-top-0" data-toggle="tooltip" data-placement="top" title=""
+                                                    data-original-title=".z-depth-top-0">
+                                                    <p style="font-weight: bold; margin-bottom: 10px;" >
+                                                        Document N° 03
+                                                    </p>
+                                                    <p style="margin-top: 10px;" >
+                                                        {% if codes_pg.2 %}
+                                                        Code : {{codes_pg.2}}<br>
+                                                        {% endif %}                                   
+                                                        {% if titres_pg.2 %}
+                                                        Titre : {{titres_pg.2}}<br>
+                                                        {% endif %}                                   
+                                                    </p>
+                                                    <p style="margin-top: 10px;" >
+                                                        <span style="font-weight: bold;">PAGE DE GARDE:</span><br>
+                                                        Nombre Paragraphes : {{titre.0.2}}<br>
+                                                        Nombre Phrases : {{titre.1.2}}<br>
+                                                        Nombre Mots : {{titre.2.2}}<br>
+                                                    </p>
+                                                    <p style="margin-top: 3px;" >
+                                                        <span style="font-weight: bold;">INTRODUCTION:</span><br>
+                                                        Nombre Paragraphes : {{introductuion.0.2}}<br>
+                                                        Nombre Phrases : {{introductuion.1.2}}<br>
+                                                        Nombre Mots : {{introductuion.2.2}}<br>
+                                                    </p>
+                                                    <p style="margin-top: 3px;" >
+                                                        <span style="font-weight: bold;">CONCLUSION:&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                                                        Nombre Paragraphes : {{conclusion.0.2}}<br>
+                                                        Nombre Phrases : {{conclusion.1.2}}<br>
+                                                        Nombre Mots : {{conclusion.2.2}}<br>
+                                                    </p>
+                                                </div>
+                                            </div> 
+                                        {% endif %}  
+                                        {% if codes_pg.3 %}
+                                            <div class="col-lg-3">
+                                                <div class="p-20 z-depth-top-0" data-toggle="tooltip" data-placement="top" title=""
+                                                    data-original-title=".z-depth-top-0">
+                                                    <p style="font-weight: bold; margin-bottom: 10px;" >
+                                                        Document N° 04
+                                                    </p>
+                                                    <p style="margin-top: 10px;" >
+                                                        {% if codes_pg.3 %}
+                                                        Code : {{codes_pg.3}}<br>
+                                                        {% endif %}                                   
+                                                        {% if titres_pg.3 %}
+                                                        Titre : {{titres_pg.3}}<br>
+                                                        {% endif %}                                   
+                                                    </p>
+                                                    <p style="margin-top: 10px;" >
+                                                        <span style="font-weight: bold;">PAGE DE GARDE:</span><br>
+                                                        Nombre Paragraphes : {{titre.0.3}}<br>
+                                                        Nombre Phrases : {{titre.1.3}}<br>
+                                                        Nombre Mots : {{titre.2.3}}<br>
+                                                    </p>
+                                                    <p style="margin-top: 3px;" >
+                                                        <span style="font-weight: bold;">INTRODUCTION:</span><br>
+                                                        Nombre Paragraphes : {{introductuion.0.3}}<br>
+                                                        Nombre Phrases : {{introductuion.1.3}}<br>
+                                                        Nombre Mots : {{introductuion.2.3}}<br>
+                                                    </p>
+                                                    <p style="margin-top: 3px;" >
+                                                        <span style="font-weight: bold;">CONCLUSION:&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                                                        Nombre Paragraphes : {{conclusion.0.3}}<br>
+                                                        Nombre Phrases : {{conclusion.1.3}}<br>
+                                                        Nombre Mots : {{conclusion.2.3}}<br>
+                                                    </p>
+                                                </div>
+                                            </div> 
+                                        {% endif %}  
+  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- [ page content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block javascripts %}
+{{ block.super }}
+<!-- <script src="/static/vendors/pdfmake/build/vfs_fonts.js"></script> -->
+{% endblock javascripts %}

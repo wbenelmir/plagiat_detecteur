@@ -46,6 +46,24 @@ Soutenu le  7 juillet 2019, devant le jury composé de :
 
 
 
+Meadi Med Nadjib
+
+MCB
+
+Président
+
+Zerarka Med foauzi
+
+MCA
+
+Rapporteur
+
+Boukhlouf Djemaa
+
+MCB
+
+Examinateur
+
 
 
 الملخص :
@@ -3982,24 +4000,6 @@ Bibliographie
 	Haïfa ZARGAYOUN. Contexte et sémantique pour une indexation de documents semi- structurés. Technical report, LIMSI/CNRS-UniversitéParis11, 2006.
 
 	Xu Zhang. Analyse de la similarité du code source pour la réutilisation automatique de tests unitaires à l’aide du CBR. PhD thesis, université Laval Québec, Canada, 2013.
-
-Meadi Med Nadjib
-
-MCB
-
-Président
-
-Zerarka Med foauzi
-
-MCA
-
-Rapporteur
-
-Boukhlouf Djemaa
-
-MCB
-
-Examinateur
 
 
 

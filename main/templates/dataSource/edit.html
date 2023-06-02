@@ -24,7 +24,7 @@
                 <div class="page-header-title">
                     <i class="fa fa-database bg-c-blue"></i>
                     <div class="d-inline">
-                        <h5>Data Source</h5>
+                        <h5>{%  if request.user.is_superuser %} Data Source <span style="color: goldenrod;" >(archive) </span>{% else %} Véricateur de Plagiat {% endif %}</h5>
                         <span>Modification</span>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row mb-3">
+                                        <div hidden class="row mb-3">
                                             <label class="form-label col-sm-2 col-form-label">Doc
                                                 :</label>
                                             <div class="col-sm-9">

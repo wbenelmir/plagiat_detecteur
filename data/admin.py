@@ -51,8 +51,8 @@ class DatasourceImportExport(ImportExportModelAdmin):
             'introduction_nombre_phrase',
             'introduction_nombre_mot',
 
-            'descripteur_global',
-            'descripteur_conclusion',
-            'descripteur_introduction',
+        #     'descripteur_global',
+        #     'descripteur_conclusion',
+        #     'descripteur_introduction',
     ]
 
