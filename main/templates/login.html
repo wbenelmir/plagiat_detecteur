@@ -18,9 +18,8 @@
     <!-- Style -->
     <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
   
-    <!-- Favicon icon -->
-    <link rel="icon" href="{% static 'template/files/assets/images/favicon.ico' %}" type="image/x-icon">
-
+  <!-- Favicon icon -->
+  <link rel="icon" href="{% static 'template/files/assets/images/favicon.ico' %}" type="image/x-icon">
     <!-- feather icon -->
     <link rel="stylesheet" type="text/css" href="{% static 'template/files/assets/icon/feather/css/feather.css' %}">
     <!-- themify-icons line icon -->
@@ -59,7 +58,7 @@
             <form action="{% url 'login' %}" method="POST">
               {% csrf_token %}
               <div class="form-group first">
-                <label for="username">Nom d'utilisateur / اسم المستخدم</label>
+                <label for="username">Email/ البريد الالكتروني</label>
                 <input  type="text" class="form-control" id="username" name="username" required="">
               </div>
               <div class="form-group last mb-4">
@@ -71,6 +70,11 @@
               <input style="font-family: arabic; background-color: #E6922E; border-color: #FA9645;" type="submit" value="Connectez vous / تسجيل الدخول" class="btn text-white btn-block btn-primary">
 
               
+              <span class="d-block text-left my-4 text-muted">
+                Vous n'avez pas de compte ? 
+                <a style="text-decoration: none; margin-left: 10px; color:#d1780c; font-weight: bold;" href="{% url 'register' %}"><i class="fa fa-address-book-o" aria-hidden="true"></i> Inscrivez-vous ici</a>
+               </span>
+
               <span class="d-block text-left my-4 text-muted">
                 Ou inscrivez-vous avec
                 <a style="text-decoration: none; margin-left: 10px; color:#3B59AF;" href="{% url 'social:begin' 'linkedin-oauth2' %}"><i style="margin-right: 5px;" class="fa fa-linkedin" aria-hidden="true"></i> LinkedIn</a>

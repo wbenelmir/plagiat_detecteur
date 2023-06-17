@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'template/files/assets/images/favicon.ico' %}" type="image/x-icon">
+    <title>ANAE - Inscription</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'register/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'register/css/style.css' %}">
+    
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+            <!-- <img src="images/signup-bg.jpg" alt=""> -->
+            <div class="container">
+                <div class="signup-content">
+                    <form action="" method="POST" id="signup-form" class="signup-form">
+                        {% csrf_token %}
+                        <p class="loginhere" style="margin-top: 0px;">
+                            <img class="img-thumbnail" src="{% static 'template/files/assets/images/logo_blak.png' %}"
+						style="width: 227px; height: 69px;">
+                        </p>
+                        <h2 class="form-title" style="color: #30647c;">Créer mon compte - <span class="arb"> إنشاء حسابي  </span> </h2>
+
+                        <div hidden class="form-group">
+                            <input name="code_student" type="text" class="form-input"  id="code_student" placeholder="Code" required style="border-style: solid; border-color: #94c6cc;"/>
+                        </div>
+
+                        <div class="form-group">
+                            <input name="first_name" type="text" class="form-input"  id="name" placeholder="Nom (الاسم بالحروف اللاتينية)" required pattern="[a-zA-ZÀ-ÿ]+" style="border-style: solid; border-color: #94c6cc;"/>
+                        </div>
+                        <div class="form-group">
+                            <input name="last_name" type="text" class="form-input" id="name" placeholder="Prénom (اللقب بالحروف اللاتينية)" required pattern="[a-zA-ZÀ-ÿ]+" style="border-style: solid; border-color: #94c6cc;"/>
+                        </div>
+                        <div class="form-group">
+                            <input  name="email"  type="email" class="form-input"  id="email" placeholder="Adresse email (عنوان البريد الالكتروني)" required style="border-style: solid; border-color: #94c6cc;"/>
+                        </div>
+                        <div class="form-group">
+                            <input  name="password1"  type="password" class="form-input"  id="password" placeholder="Mot de passe (كلمة السر)" pattern="(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"  required style="border-style: solid; border-color: #94c6cc;"/>
+                        </div>
+                        <div class="form-group">
+                            <input name="password2"  type="password" class="form-input" id="re_password" placeholder="Répétez le mot de passe (أعد كتابة كلمة السر )" pattern="(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"  required style="border-style: solid; border-color: #94c6cc;"/>
+                        </div>
+                        <div class="form-group" >
+                            <input  type="checkbox" name="agree-term" id="agree-term" class="agree-term" required checked />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>J'accepte toutes les déclarations des  <a href="#" class="term-service">Conditions d'utilisation</a>
+                                <br>
+                                <p style="margin-left: 30px;">
+                                بالنقر على زر التسجيل فانك توافق على   <a href="#" class="term-service"> شروط الاستخدام</a>
+                                </p>
+                        </label>
+
+                        </div>
+
+                        {{ captchaForm.captcha }}
+                        <br>
+                        {% if messages %}
+                        <br>
+                        <div class="row mb-3">
+                            <label class="form-label col-sm-1 col-form-label"></label>
+                            <div class="col-sm-10">
+                        {% for message in messages %}
+                        
+                                {% if message.tags == "success" %}
+                                <span style="margin-left: 10px; color: darkgreen; "><i style="margin-right: 10px;" class="fa fa-check-circle-o"></i> {{message}}</span>
+                                
+                                {% elif message.tags == "warning" %} 
+                                <span style="margin-left: 10px; color:orange; "><i style="margin-right: 10px;" class="fa fa-question-circle"></i>{{message}}</span>
+                                {% elif message.tags == "info" %}
+                                <span style="margin-left: 10px; font-weight: bold; color:darkslategrey; "><i style="margin-right: 10px;" class="fa fa-exclamation"></i>{{message}}</span>
+                                {% else %}
+                                <span style="margin-left: 10px;color:rgb(206, 67, 33); "><i style="margin-right: 10px;" class="fa fa-exclamation-triangle"></i>{{message}}</span>
+                                {% endif %}
+
+                        {% endfor %}
+                        <br>
+                        {% endif %}
+
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Créer mon compte" style="cursor: pointer; color: #ffffff"/>
+                        </div>
+                    </form>
+                    <p class="loginhere">
+                        Avez-vous déjà un compte? <a href="{%  url 'login' %}" class="loginhere-link">Connectez-vous ici.</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    
+
+    <!-- JS -->
+    <script src="{% static 'register/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'register/js/main.js' %}"></script>
+    <script>
+        function makeid(length) 
+        {
+            let result = '';
+            const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789';
+            const charactersLength = characters.length;
+            let counter = 0;
+            while (counter < length) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            counter += 1;
+            }
+            return result;
+        }
+
+        var ref = new Date();
+        var x = ("0" + (ref.getMonth() + 1)).slice(-2) + ("0" + (ref.getDate() + 2)).slice(-2) + ("0" + (ref.getHours() + 2)).slice(-2) + ("0" + (ref.getMinutes() + 2)).slice(-2) + ("0" + (ref.getSeconds() + 2)).slice(-2);
+
+        document.getElementById('code_student').value = makeid(8);
+
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
